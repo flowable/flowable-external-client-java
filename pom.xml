@@ -14,6 +14,8 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<spring-boot.version>3.1.2</spring-boot.version>
 
+		<distributionManagementSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</distributionManagementSnapshotsUrl>
+
 		<maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 		<maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
@@ -216,5 +218,61 @@
 			</build>
 		</profile>
 	</profiles>
+
+	<!-- Various information needed for a release -->
+	<url>https://www.flowable.org</url>
+	<licenses>
+		<license>
+			<name>Apache v2</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
+		</license>
+	</licenses>
+	<organization>
+		<name>Flowable</name>
+		<url>https://www.flowable.org</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>Tijs Rademakers</name>
+			<organization>Flowable</organization>
+			<url>https://www.flowable.org</url>
+		</developer>
+		<developer>
+			<name>Joram Barrez</name>
+			<organization>Flowable</organization>
+			<url>https://www.flowable.org</url>
+		</developer>
+		<developer>
+			<name>Filip Hrisafov</name>
+			<organization>Flowable</organization>
+			<url>https://www.flowable.org</url>
+		</developer>
+		<developer>
+			<name>Valentin Zickner</name>
+			<organization>Flowable</organization>
+			<url>https://www.flowable.org</url>
+		</developer>
+	</developers>
+	<issueManagement>
+		<system>Github issues</system>
+		<url>https://github.com/flowable/flowable-external-client-java/issues</url>
+	</issueManagement>
+	<scm>
+		<url>git@github.com:flowable/flowable-external-client-java.git</url>
+		<connection>scm:git:git@github.com:flowable/flowable-external-client-java.git</connection>
+		<developerConnection>scm:git:git@github.com:flowable/flowable-external-client-java.git</developerConnection>
+	</scm>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>${distributionManagementSnapshotsUrl}</url>
+		</snapshotRepository>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 
 </project>
