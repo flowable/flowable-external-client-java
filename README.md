@@ -1,16 +1,10 @@
 # Flowable External Worker Library for Java
 
-To use Flowable together with a Java application external workers can be used.
-This project allows to connect a Java library to Flowable.
-To connect to a Flowable installation it is required [to authenticate](#authentication).
-With the client it is possible to specify a callback method which is called for every job executed.
+An _External Worker Task_ in BPMN or CMMN is a task where the custom logic of that task is executed externally to Flowable, i.e. on another server.
+When the process or case engine arrives at such a task, it will create an **external job**, which is exposed over the REST API.
+Through this REST API, the job can be acquired and locked. Once locked, the custom logic is responsible for signalling over REST that the work is done and the process or case can continue.
 
-## Authentication
-
-There are 2 ways that the application can be authenticated with a Flowable installation.
-
-* Using HTTP Basic authentication with a provided username and password
-* Using HTTP Bearer authentication with a provided access token
+This project makes implementing such custom logic in Java easy by not having the worry about the low-level details of the REST API and focus on the actual custom business logic. Integrations for other languages are available, too.
 
 ## Spring Boot Sample
 
@@ -75,9 +69,9 @@ public class ExampleWorker {
 ```
 
 
-### Local
+### Connection properties
 
-The following properties are example how you can connect to a Flowable instance running at `http://host.docker.internal:8090`
+The following properties show how you can connect to a Flowable instance running at `http://host.docker.internal:8090` using basic authentication:
 
 ```properties
 flowable.external.worker.rest.base-url=http://host.docker.internal:8090
@@ -85,12 +79,37 @@ flowable.external.worker.rest.authentication.basic.username=admin
 flowable.external.worker.rest.authentication.basic.password=test
 ```
 
-### Cloud
+The context path can also be changed, if necessary:
 
-The usage with Flowable Cloud is simpler, since everything is pre-configured.
-However, it's required to either use the user credentials or to pre-configure a personal access token.
+```properties
+flowable.external.worker.rest.context-path=/external-job-api
+```
+
+## Authentication
+
+There are two ways that the application can be authenticated with a Flowable installation:
+
+* Using HTTP Basic authentication with a provided username and password, as shown in the example above.
+* Using HTTP Bearer authentication with a provided access token. In that case the `.basic` properties are replaced by the `flowable.external.worker.rest.authentication.bearer.token=myTokenValue` property.
+
+### Flowable Cloud
+
+Connecting an external worker to the Flowable Cloud is simpler, since everything is pre-configured.
+It's required to either use the user credentials or to pre-configure a personal access token, for example:
 
 
 ```properties
 flowable.external.worker.rest.authentication.bearer.token=<personal-access-token>
 ```
+
+### Advanced Properties
+
+The following properties are for advanced usage. Only change these if you understand the consequences and the concept of the external worker properly.
+
+* `flowable.external.worker.workerId` : gives the external worker a custom identifier, which is used to identify which external worker has locked an external worker job.
+* `flowable.external.worker.concurrency` : The amount of threads available to poll and execute external worker jobs. By default `1`.
+* `flowable.external.worker.lock-duration` : The amount of time an external job will be locked when acquired. If this time limit is reached, other external workers will be able to acquire the same job. By default 5 minutes.
+* `flowable.external.worker.number-of-retries` : The number of times to retry acquiring new jobs on the Floable server-side before giving up. By default 5.
+* `flowable.external.worker.number-of-tasks` : The amount of external worker tasks to acquire and lock in one go. The default is `1`.
+* `flowable.external.worker.polling-interval` : The amount of time between polling for new external worker jobs. By default 5 seconds.
+
