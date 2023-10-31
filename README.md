@@ -109,7 +109,7 @@ The following properties are for advanced usage. Only change these if you unders
 * `flowable.external.worker.workerId` : gives the external worker a custom identifier, which is used to identify which external worker has locked an external worker job.
 * `flowable.external.worker.concurrency` : The amount of threads available to poll and execute external worker jobs. By default `1`.
 * `flowable.external.worker.lock-duration` : The amount of time an external job will be locked when acquired. If this time limit is reached, other external workers will be able to acquire the same job. By default 5 minutes.
-* `flowable.external.worker.number-of-retries` : The number of times to retry acquiring new jobs on the Floable server-side before giving up. By default 5.
+* `flowable.external.worker.number-of-retries` : The number of times to retry acquiring new jobs on the Flowable server-side before giving up. By default, 5.
 * `flowable.external.worker.number-of-tasks` : The amount of external worker tasks to acquire and lock in one go. The default is `1`.
-* `flowable.external.worker.polling-interval` : The amount of time between polling for new external worker jobs. By default 5 seconds.
+* `flowable.external.worker.polling-interval` : The amount of time between polling for new external worker jobs. By default, 10 seconds.
 
