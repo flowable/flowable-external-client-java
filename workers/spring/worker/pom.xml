@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>org.flowable.client.spring</groupId>
 		<artifactId>flowable-external-worker-spring-parent</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<name>Flowable Java external worker client Spring</name>
 	<artifactId>flowable-external-worker-spring</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<dependencies>
 		<dependency>

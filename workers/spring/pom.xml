@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.flowable.client</groupId>
 		<artifactId>flowable-external-worker-client-parent</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 	<groupId>org.flowable.client.spring</groupId>
 	<artifactId>flowable-external-worker-spring-parent</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
