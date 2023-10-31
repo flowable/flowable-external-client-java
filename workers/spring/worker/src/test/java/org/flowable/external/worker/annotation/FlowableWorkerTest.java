@@ -844,6 +844,7 @@ class FlowableWorkerTest {
         public FlowableWorkerContainerFactory<?> flowableWorkerContainerFactory(ExternalWorkerClient client) {
             DefaultFlowableWorkerContainerFactory factory = new DefaultFlowableWorkerContainerFactory();
             factory.setExternalWorkerClient(client);
+            factory.setPollingInterval(Duration.ofSeconds(10));
             return factory;
         }
     }

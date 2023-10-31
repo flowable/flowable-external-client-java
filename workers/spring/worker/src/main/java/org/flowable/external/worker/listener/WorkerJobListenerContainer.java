@@ -78,7 +78,7 @@ public class WorkerJobListenerContainer implements FlowableWorkerContainer, Bean
     protected int numberOfRetries = 5;
     protected int numberOfTasks = 1;
 
-    protected Duration pollingInterval = Duration.ofSeconds(10);
+    protected Duration pollingInterval = Duration.ofSeconds(30);
 
     protected FlowableWorkerJobListener workerJobListener;
 

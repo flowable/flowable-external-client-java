@@ -76,7 +76,7 @@ class ExternalWorkerAutoConfigurationTest {
                     assertThat(container.getLockDuration()).isEqualTo(Duration.ofMinutes(5));
                     assertThat(container.getNumberOfRetries()).isEqualTo(5);
                     assertThat(container.getNumberOfTasks()).isEqualTo(1);
-                    assertThat(container.getPollingInterval()).isEqualTo(Duration.ofSeconds(10));
+                    assertThat(container.getPollingInterval()).isEqualTo(Duration.ofSeconds(30));
                 });
     }
 
