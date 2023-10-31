@@ -5,10 +5,11 @@
 	<parent>
 		<groupId>org.flowable.client</groupId>
 		<artifactId>flowable-external-worker-client-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
+	<name>Flowable Java external worker client</name>
 	<artifactId>flowable-external-worker-client-java</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 
 	<dependencies>
