@@ -1,5 +1,10 @@
 # Flowable External Worker Library for Java
 
+[License:  
+![license](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/flowable/flowable-engine/blob/main/LICENSE)
+
+![Flowable Actions CI](https://github.com/flowable/flowable-external-client-java/workflows/Flowable%20Main%20Build/badge.svg?branch=main)
+
 An _External Worker Task_ in BPMN or CMMN is a task where the custom logic of that task is executed externally to Flowable, i.e. on another server.
 When the process or case engine arrives at such a task, it will create an **external job**, which is exposed over the REST API.
 Through this REST API, the job can be acquired and locked. Once locked, the custom logic is responsible for signalling over REST that the work is done and the process or case can continue.
