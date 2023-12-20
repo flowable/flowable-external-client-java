@@ -118,3 +118,42 @@ The following properties are for advanced usage. Only change these if you unders
 * `flowable.external.worker.number-of-tasks` : The amount of external worker tasks to acquire and lock in one go. The default is `1`.
 * `flowable.external.worker.polling-interval` : The amount of time between polling for new external worker jobs. By default, 30 seconds.
 
+
+## Plain Java
+
+The following dependency needs to be added to start in a plain Java project without Spring Boot:
+
+```xml
+<dependency>
+    <groupId>org.flowable.client</groupId>
+    <artifactId>flowable-external-worker-client-java</artifactId>
+    <version>${flowable-worker-client.version}</version>
+</dependency>
+```
+
+The following is an example Flowable Worker that is retrieving jobs from the `myTopic` topic
+
+```java
+ExternalWorkerClient externalWorkerClient = RestExternalWorkerClient.create(
+        "my-worker",
+        JavaHttpClientRestInvoker.withBasicAuth("http://localhost:8090/external-job-api", "admin", "test"),
+        new ObjectMapper()
+);
+List<AcquiredExternalWorkerJob> jobs = externalWorkerClient.createJobAcquireBuilder()
+        .topic("myTopic")
+        .lockDuration(Duration.ofMinutes(1L))
+        .acquireAndLock();
+
+for (AcquiredExternalWorkerJob job : jobs) {
+    System.out.println("Executed job: " + job.getId());
+    externalWorkerClient.createCompletionBuilder(job)
+            .complete();
+}
+```
+
+### Authentication
+
+There are two ways that the application can be authenticated with a Flowable installation:
+
+* Using HTTP Basic authentication with a provided username and password, as shown in the example above.
+* Using HTTP Bearer authentication with a provided access token. In this case the `RestInvoker` can be created like this: `JavaHttpClientRestInvoker.withAccessToken("http://localhost:8090/external-job-api", "<your-access-token>")`
