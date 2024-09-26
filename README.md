@@ -97,9 +97,9 @@ There are two ways that the application can be authenticated with a Flowable ins
 * Using HTTP Basic authentication with a provided username and password, as shown in the example above.
 * Using HTTP Bearer authentication with a provided access token. In that case the `.basic` properties are replaced by the `flowable.external.worker.rest.authentication.bearer.token=myTokenValue` property.
 
-### Flowable Cloud
+### Flowable Trial
 
-Connecting an external worker to the Flowable Cloud is simpler, since everything is pre-configured.
+Connecting an external worker to the Flowable Trial is simpler, since everything is pre-configured.
 It's required to either use the user credentials or to pre-configure a personal access token, for example:
 
 
