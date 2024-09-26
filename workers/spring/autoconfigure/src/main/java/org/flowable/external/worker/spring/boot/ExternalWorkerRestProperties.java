@@ -26,7 +26,7 @@ public class ExternalWorkerRestProperties implements InitializingBean {
     /**
      * The base URL of the Flowable application.
      */
-    private String baseUrl = "https://cloud.flowable.com/work/";
+    private String baseUrl = "https://trial.flowable.com/work/";
 
     /**
      * The context path of the External Job REST API
