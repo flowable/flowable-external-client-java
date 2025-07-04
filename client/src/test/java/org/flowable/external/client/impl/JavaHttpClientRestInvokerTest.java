@@ -24,6 +24,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import org.junit.jupiter.api.AfterEach;
@@ -205,6 +206,24 @@ class JavaHttpClientRestInvokerTest {
                 );
         assertThatJson(new String(receivedRequest.body(), StandardCharsets.UTF_8))
                 .isEqualTo("{ workerId: 'test' }");
+    }
+
+    @Test
+    void withAccessTokenDynamicSupplierAuthentication() {
+        AtomicInteger counter = new AtomicInteger(0);
+        handler.addJsonResponse(200, "{}");
+        handler.addJsonResponse(200, "{}");
+        RestInvoker restInvoker = JavaHttpClientRestInvoker.withAccessToken(baseUrl + "/work", () -> "SomeToken" + counter.incrementAndGet());
+        ObjectNode request = objectMapper.createObjectNode()
+                .put("workerId", "test");
+        restInvoker.post("/jobs", request);
+        restInvoker.post("/jobs", request);
+
+        Request receivedRequest = handler.takeRequest();
+        assertThat(receivedRequest.header("Authorization")).isEqualTo("Bearer SomeToken1");
+
+        receivedRequest = handler.takeRequest();
+        assertThat(receivedRequest.header("Authorization")).isEqualTo("Bearer SomeToken2");
     }
 
     @ParameterizedTest
