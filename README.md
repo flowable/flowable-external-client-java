@@ -1,7 +1,8 @@
 # Flowable External Worker Library for Java
 
-[License:  
-![license](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/flowable/flowable-engine/blob/main/LICENSE)
+[![Java](https://img.shields.io/maven-central/v/org.flowable.client/flowable-external-worker-client-java.svg?label=Java)](https://central.sonatype.com/search?namespace=org.flowable.client)
+[![Spring](https://img.shields.io/maven-central/v/org.flowable.client/flowable-external-worker-client-java.svg?label=Spring)](https://central.sonatype.com/search?namespace=org.flowable.client.spring)
+[![license](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/flowable/flowable-engine/blob/main/LICENSE)
 
 ![Flowable Actions CI](https://github.com/flowable/flowable-external-client-java/actions/workflows/main.yml/badge.svg?branch=main)
 
