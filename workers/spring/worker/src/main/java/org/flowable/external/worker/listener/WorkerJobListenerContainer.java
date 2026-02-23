@@ -34,7 +34,7 @@ import org.springframework.scheduling.SchedulingAwareRunnable;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 import org.flowable.external.client.AcquiredExternalWorkerJob;
 import org.flowable.external.client.ExternalWorkerClient;
 import org.flowable.external.client.ExternalWorkerJobCompletionBuilder;

@@ -12,7 +12,7 @@
  */
 package org.flowable.external.client.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import org.flowable.external.client.AcquiredExternalWorkerJob;
 import org.flowable.external.client.ExternalWorkerClient;
 import org.flowable.external.client.ExternalWorkerJobAcquireBuilder;

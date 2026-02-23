@@ -21,18 +21,17 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.BooleanNode;
-import com.fasterxml.jackson.databind.node.DoubleNode;
-import com.fasterxml.jackson.databind.node.IntNode;
-import com.fasterxml.jackson.databind.node.LongNode;
-import com.fasterxml.jackson.databind.node.NullNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.ShortNode;
-import com.fasterxml.jackson.databind.node.TextNode;
-import com.fasterxml.jackson.databind.util.ISO8601Utils;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.BooleanNode;
+import tools.jackson.databind.node.DoubleNode;
+import tools.jackson.databind.node.IntNode;
+import tools.jackson.databind.node.LongNode;
+import tools.jackson.databind.node.NullNode;
+import tools.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.node.ShortNode;
+import tools.jackson.databind.node.StringNode;
 import org.flowable.external.client.AcquiredExternalWorkerJob;
 import org.flowable.external.client.ExternalWorkerJobCompletionBuilder;
 import org.flowable.external.client.FlowableClientException;
@@ -59,7 +58,7 @@ public class RestExternalWorkerCompletionBuilder implements ExternalWorkerJobCom
 
     @Override
     public ExternalWorkerJobCompletionBuilder variable(String name, String value) {
-        return addVariableToRequest(name, "string", value, TextNode::valueOf);
+        return addVariableToRequest(name, "string", value, StringNode::valueOf);
     }
 
     @Override
@@ -89,22 +88,22 @@ public class RestExternalWorkerCompletionBuilder implements ExternalWorkerJobCom
 
     @Override
     public ExternalWorkerJobCompletionBuilder variable(String name, Date value) {
-        return addVariableToRequest(name, "date", value, v -> TextNode.valueOf(ISO8601Utils.format(v)));
+        return addVariableToRequest(name, "date", value, v -> StringNode.valueOf(v.toInstant().toString()));
     }
 
     @Override
     public ExternalWorkerJobCompletionBuilder variable(String name, Instant value) {
-        return addVariableToRequest(name, "instant", value, v -> TextNode.valueOf(v.toString()));
+        return addVariableToRequest(name, "instant", value, v -> StringNode.valueOf(v.toString()));
     }
 
     @Override
     public ExternalWorkerJobCompletionBuilder variable(String name, LocalDate value) {
-        return addVariableToRequest(name, "localDate", value, v -> TextNode.valueOf(v.toString()));
+        return addVariableToRequest(name, "localDate", value, v -> StringNode.valueOf(v.toString()));
     }
 
     @Override
     public ExternalWorkerJobCompletionBuilder variable(String name, LocalDateTime value) {
-        return addVariableToRequest(name, "localDateTime", value, v -> TextNode.valueOf(v.toString()));
+        return addVariableToRequest(name, "localDateTime", value, v -> StringNode.valueOf(v.toString()));
     }
 
     @Override
@@ -130,7 +129,7 @@ public class RestExternalWorkerCompletionBuilder implements ExternalWorkerJobCom
         try {
             String serializedValue = objectMapper.writeValueAsString(value);
             return objectMapper.readTree(serializedValue);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             throw new FlowableClientException("Failed to convert value of type " + value.getClass().getName() + " to json", e);
         }
     }

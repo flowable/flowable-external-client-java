@@ -18,7 +18,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.node.ObjectNode;
 import org.flowable.external.client.AcquiredExternalWorkerJob;
 import org.flowable.external.worker.annotation.FlowableWorker;
 

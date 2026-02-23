@@ -20,7 +20,7 @@ import java.util.Date;
 
 import org.flowable.external.worker.annotation.FlowableWorker;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 
 /**
  * A result that can be returned by a method annotated with {@link FlowableWorker @FlowableWorker}.

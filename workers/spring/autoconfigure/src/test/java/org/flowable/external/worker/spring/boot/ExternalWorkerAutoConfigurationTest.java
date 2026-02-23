@@ -41,7 +41,7 @@ import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.assertj.AssertableApplicationContext;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import org.flowable.external.client.ExternalWorkerClient;
 import org.flowable.external.client.impl.JavaHttpClientRestInvoker;
 import org.flowable.external.client.impl.RestInvoker;
