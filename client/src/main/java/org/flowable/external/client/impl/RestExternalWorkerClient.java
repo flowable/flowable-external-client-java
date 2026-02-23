@@ -12,12 +12,13 @@
  */
 package org.flowable.external.client.impl;
 
-import tools.jackson.databind.ObjectMapper;
 import org.flowable.external.client.AcquiredExternalWorkerJob;
 import org.flowable.external.client.ExternalWorkerClient;
 import org.flowable.external.client.ExternalWorkerJobAcquireBuilder;
 import org.flowable.external.client.ExternalWorkerJobCompletionBuilder;
 import org.flowable.external.client.ExternalWorkerJobFailureBuilder;
+
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * @author Filip Hrisafov

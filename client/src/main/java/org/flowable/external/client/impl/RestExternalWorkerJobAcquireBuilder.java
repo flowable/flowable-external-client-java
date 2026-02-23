@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+import org.flowable.external.client.AcquiredExternalWorkerJob;
+import org.flowable.external.client.FlowableClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,8 +30,6 @@ import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.node.ArrayNode;
 import tools.jackson.databind.node.ObjectNode;
-import org.flowable.external.client.AcquiredExternalWorkerJob;
-import org.flowable.external.client.FlowableClientException;
 
 /**
  * @author Filip Hrisafov

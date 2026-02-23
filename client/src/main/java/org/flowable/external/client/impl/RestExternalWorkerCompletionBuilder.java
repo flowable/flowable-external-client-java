@@ -18,6 +18,9 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.function.Function;
 
+import org.flowable.external.client.AcquiredExternalWorkerJob;
+import org.flowable.external.client.ExternalWorkerJobCompletionBuilder;
+import org.flowable.external.client.FlowableClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,9 +35,6 @@ import tools.jackson.databind.node.NullNode;
 import tools.jackson.databind.node.ObjectNode;
 import tools.jackson.databind.node.ShortNode;
 import tools.jackson.databind.node.StringNode;
-import org.flowable.external.client.AcquiredExternalWorkerJob;
-import org.flowable.external.client.ExternalWorkerJobCompletionBuilder;
-import org.flowable.external.client.FlowableClientException;
 
 /**
  * @author Filip Hrisafov

@@ -12,13 +12,13 @@
  */
 package org.flowable.external.worker;
 
+import org.flowable.external.client.ExternalWorkerClient;
+import org.flowable.external.client.impl.RestExternalWorkerClient;
+import org.flowable.external.client.impl.RestInvoker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import tools.jackson.databind.ObjectMapper;
-import org.flowable.external.client.ExternalWorkerClient;
-import org.flowable.external.client.impl.RestExternalWorkerClient;
-import org.flowable.external.client.impl.RestInvoker;
 
 /**
  * @author Filip Hrisafov

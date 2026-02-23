@@ -25,16 +25,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanNameAware;
-import org.springframework.core.task.AsyncTaskExecutor;
-import org.springframework.core.task.SimpleAsyncTaskExecutor;
-import org.springframework.scheduling.SchedulingAwareRunnable;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
-
-import tools.jackson.databind.JsonNode;
 import org.flowable.external.client.AcquiredExternalWorkerJob;
 import org.flowable.external.client.ExternalWorkerClient;
 import org.flowable.external.client.ExternalWorkerJobCompletionBuilder;
@@ -46,6 +36,16 @@ import org.flowable.external.worker.WorkerContextAwareFlowableWorkerJobListener;
 import org.flowable.external.worker.WorkerResult;
 import org.flowable.external.worker.WorkerResultBuilder;
 import org.flowable.external.worker.worker.FlowableWorkerContainer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.core.task.AsyncTaskExecutor;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.scheduling.SchedulingAwareRunnable;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
+
+import tools.jackson.databind.JsonNode;
 
 /**
  * @author Filip Hrisafov

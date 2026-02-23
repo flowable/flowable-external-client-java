@@ -29,6 +29,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import org.flowable.external.client.ExternalWorkerClient;
+import org.flowable.external.client.impl.JavaHttpClientRestInvoker;
+import org.flowable.external.client.impl.RestInvoker;
+import org.flowable.external.worker.config.DefaultFlowableWorkerContainerFactory;
+import org.flowable.external.worker.config.FlowableWorkerContainerFactory;
+import org.flowable.external.worker.config.FlowableWorkerEndpoint;
+import org.flowable.external.worker.listener.WorkerJobListenerContainer;
 import org.junit.jupiter.api.Test;
 import org.microhttp.EventLoop;
 import org.microhttp.Handler;
@@ -42,13 +49,6 @@ import org.springframework.boot.test.context.assertj.AssertableApplicationContex
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
 import tools.jackson.databind.ObjectMapper;
-import org.flowable.external.client.ExternalWorkerClient;
-import org.flowable.external.client.impl.JavaHttpClientRestInvoker;
-import org.flowable.external.client.impl.RestInvoker;
-import org.flowable.external.worker.config.DefaultFlowableWorkerContainerFactory;
-import org.flowable.external.worker.config.FlowableWorkerContainerFactory;
-import org.flowable.external.worker.config.FlowableWorkerEndpoint;
-import org.flowable.external.worker.listener.WorkerJobListenerContainer;
 
 /**
  * @author Filip Hrisafov
