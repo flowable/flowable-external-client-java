@@ -59,11 +59,11 @@ public class ExternalWorkerAutoConfiguration {
         workContainerFactory.setExternalWorkerClient(externalWorkerClient);
 
         PropertyMapper propertyMapper = PropertyMapper.get();
-        propertyMapper.from(properties.getConcurrency()).when(Objects::nonNull).to(workContainerFactory::setConcurrency);
-        propertyMapper.from(properties.getLockDuration()).when(Objects::nonNull).to(workContainerFactory::setLockDuration);
-        propertyMapper.from(properties.getNumberOfRetries()).when(Objects::nonNull).to(workContainerFactory::setNumberOfRetries);
-        propertyMapper.from(properties.getNumberOfTasks()).when(Objects::nonNull).to(workContainerFactory::setNumberOfTasks);
-        propertyMapper.from(properties.getPollingInterval()).when(Objects::nonNull).to(workContainerFactory::setPollingInterval);
+        propertyMapper.from(properties.getConcurrency()).to(workContainerFactory::setConcurrency);
+        propertyMapper.from(properties.getLockDuration()).to(workContainerFactory::setLockDuration);
+        propertyMapper.from(properties.getNumberOfRetries()).to(workContainerFactory::setNumberOfRetries);
+        propertyMapper.from(properties.getNumberOfTasks()).to(workContainerFactory::setNumberOfTasks);
+        propertyMapper.from(properties.getPollingInterval()).to(workContainerFactory::setPollingInterval);
         return workContainerFactory;
     }
 
