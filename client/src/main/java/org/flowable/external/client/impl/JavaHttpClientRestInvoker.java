@@ -22,8 +22,9 @@ import java.util.Base64;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.flowable.external.client.FlowableClientException;
+
+import tools.jackson.databind.node.ObjectNode;
 
 /**
  * @author Filip Hrisafov

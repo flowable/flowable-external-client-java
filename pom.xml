@@ -16,7 +16,7 @@
 		<java.version>17</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<spring-boot.version>3.1.2</spring-boot.version>
+		<spring-boot.version>4.0.3</spring-boot.version>
 
 		<distributionManagementSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</distributionManagementSnapshotsUrl>
 
@@ -78,7 +78,7 @@
 			<dependency>
 				<groupId>net.javacrumbs.json-unit</groupId>
 				<artifactId>json-unit-assertj</artifactId>
-				<version>3.0.0</version>
+				<version>5.1.0</version>
 			</dependency>
 
 		</dependencies>

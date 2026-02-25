@@ -12,26 +12,24 @@
  */
 package org.flowable.external.client.impl;
 
-import java.text.ParseException;
-import java.text.ParsePosition;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+import org.flowable.external.client.AcquiredExternalWorkerJob;
+import org.flowable.external.client.FlowableClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.util.ISO8601Utils;
-import org.flowable.external.client.AcquiredExternalWorkerJob;
-import org.flowable.external.client.FlowableClientException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.ArrayNode;
+import tools.jackson.databind.node.ObjectNode;
 
 /**
  * @author Filip Hrisafov
@@ -104,7 +102,7 @@ public class RestExternalWorkerJobAcquireBuilder extends BaseExternalWorkerJobAc
             }
 
             return jobs;
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             throw new FlowableClientException("Failed to read response", e);
         }
     }
@@ -182,13 +180,7 @@ public class RestExternalWorkerJobAcquireBuilder extends BaseExternalWorkerJobAc
             case "boolean" -> valueNode.booleanValue();
             case "double" -> valueNode.doubleValue();
             case "long" -> valueNode.longValue();
-            case "date" -> {
-                try {
-                    yield ISO8601Utils.parse(valueNode.textValue(), new ParsePosition(0));
-                } catch (ParseException e) {
-                    yield null;
-                }
-            }
+            case "date" -> Date.from(Instant.parse(valueNode.textValue()));
             case "instant" -> Instant.parse(valueNode.textValue());
             case "localDate" -> LocalDate.parse(valueNode.textValue());
             case "localDateTime" -> LocalDateTime.parse(valueNode.textValue());

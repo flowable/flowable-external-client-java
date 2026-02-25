@@ -20,9 +20,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.flowable.external.client.impl.RestInvoker;
 import org.flowable.external.client.impl.RestResponse;
+
+import tools.jackson.databind.node.ObjectNode;
 
 /**
  * @author Filip Hrisafov

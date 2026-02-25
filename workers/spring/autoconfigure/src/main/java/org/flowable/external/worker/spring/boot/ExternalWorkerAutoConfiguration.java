@@ -12,6 +12,13 @@
  */
 package org.flowable.external.worker.spring.boot;
 
+import org.flowable.external.client.ExternalWorkerClient;
+import org.flowable.external.client.impl.RestExternalWorkerClient;
+import org.flowable.external.client.impl.RestInvoker;
+import org.flowable.external.worker.annotation.EnableFlowableWorker;
+import org.flowable.external.worker.config.DefaultFlowableWorkerContainerFactory;
+import org.flowable.external.worker.config.FlowableWorkerConfigUtils;
+import org.flowable.external.worker.config.FlowableWorkerContainerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -22,14 +29,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.flowable.external.client.ExternalWorkerClient;
-import org.flowable.external.client.impl.RestExternalWorkerClient;
-import org.flowable.external.client.impl.RestInvoker;
-import org.flowable.external.worker.annotation.EnableFlowableWorker;
-import org.flowable.external.worker.config.DefaultFlowableWorkerContainerFactory;
-import org.flowable.external.worker.config.FlowableWorkerConfigUtils;
-import org.flowable.external.worker.config.FlowableWorkerContainerFactory;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * @author Filip Hrisafov
@@ -56,8 +56,7 @@ public class ExternalWorkerAutoConfiguration {
         DefaultFlowableWorkerContainerFactory workContainerFactory = new DefaultFlowableWorkerContainerFactory();
         workContainerFactory.setExternalWorkerClient(externalWorkerClient);
 
-        PropertyMapper propertyMapper = PropertyMapper.get()
-                .alwaysApplyingWhenNonNull();
+        PropertyMapper propertyMapper = PropertyMapper.get();
         propertyMapper.from(properties.getConcurrency()).to(workContainerFactory::setConcurrency);
         propertyMapper.from(properties.getLockDuration()).to(workContainerFactory::setLockDuration);
         propertyMapper.from(properties.getNumberOfRetries()).to(workContainerFactory::setNumberOfRetries);
