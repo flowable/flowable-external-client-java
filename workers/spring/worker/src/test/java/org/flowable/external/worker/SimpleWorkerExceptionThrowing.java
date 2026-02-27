@@ -40,19 +40,19 @@ public class SimpleWorkerExceptionThrowing {
 
             Object workerException = job.getVariables().get("workerException");
             if (workerException instanceof ObjectNode node) {
-                String message = node.path("message").asText();
+                String message = node.path("message").asString();
                 FlowableWorkerException exception = new FlowableWorkerException(message);
                 int retries = node.path("retries").asInt(-1);
                 if (retries > 0) {
                     exception.setRetries(retries);
                 }
 
-                String details = node.path("details").asText(null);
+                String details = node.path("details").asString(null);
                 if (details != null) {
                     exception.setErrorDetails(details);
                 }
 
-                String retryTimeout = node.path("retryTimeout").asText(null);
+                String retryTimeout = node.path("retryTimeout").asString(null);
                 if (retryTimeout != null) {
                     exception.setRetryTimeout(Duration.parse(retryTimeout));
                 }

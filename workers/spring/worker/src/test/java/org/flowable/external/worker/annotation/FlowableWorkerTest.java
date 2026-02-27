@@ -365,9 +365,9 @@ class FlowableWorkerTest {
                                                   errorDetails: '${json-unit.any-string}'
                                                 }
                                                 """);
-                                assertThat(request.body().path("errorMessage").asText())
+                                assertThat(request.body().path("errorMessage").asString())
                                         .startsWith("Listener method");
-                                assertThat(request.body().path("errorDetails").asText())
+                                assertThat(request.body().path("errorDetails").asString())
                                         .contains("Test error");
                             },
                             atIndex(0));

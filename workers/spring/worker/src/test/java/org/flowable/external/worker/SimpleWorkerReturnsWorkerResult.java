@@ -47,19 +47,19 @@ public class SimpleWorkerReturnsWorkerResult {
 
             Object workerFailure = job.getVariables().get("workerFailure");
             if (workerFailure instanceof ObjectNode node) {
-                String message = node.path("message").asText();
+                String message = node.path("message").asString();
                 WorkerResult.Failure failure = resultBuilder.failure().message(message);
                 int retries = node.path("retries").asInt(-1);
                 if (retries > 0) {
                     failure.retries(retries);
                 }
 
-                String details = node.path("details").asText(null);
+                String details = node.path("details").asString(null);
                 if (details != null) {
                     failure.details(details);
                 }
 
-                String retryTimeout = node.path("retryTimeout").asText(null);
+                String retryTimeout = node.path("retryTimeout").asString(null);
                 if (retryTimeout != null) {
                     failure.retryTimeout(Duration.parse(retryTimeout));
                 }
