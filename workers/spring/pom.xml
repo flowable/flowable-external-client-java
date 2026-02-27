@@ -8,6 +8,7 @@
 		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
+    <name>Flowable Java external worker client Spring Parent</name>
 	<groupId>org.flowable.client.spring</groupId>
 	<artifactId>flowable-external-worker-spring-parent</artifactId>
 	<version>1.0.1-SNAPSHOT</version>

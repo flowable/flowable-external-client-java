@@ -241,7 +241,7 @@
                             <!--<skipPublishing>true</skipPublishing>-->
                             <excludeArtifacts>
                                 <excludeArtifact>flowable-external-worker-sample-parent</excludeArtifact>
-                                <excludeArtifact>flowable-external-worker-spring-boot-starter</excludeArtifact>
+                                <excludeArtifact>flowable-external-worker-spring-boot-sample</excludeArtifact>
                             </excludeArtifacts>
                         </configuration>
                     </plugin>
