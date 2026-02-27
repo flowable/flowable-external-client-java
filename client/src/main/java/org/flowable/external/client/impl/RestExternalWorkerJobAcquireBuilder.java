@@ -109,34 +109,34 @@ public class RestExternalWorkerJobAcquireBuilder extends BaseExternalWorkerJobAc
 
     protected AcquiredExternalWorkerJob asJob(ObjectNode jobNode) {
         BaseAcquiredExternalWorkerJob job = new BaseAcquiredExternalWorkerJob();
-        job.setId(jobNode.path("id").asText(null));
-        job.setCorrelationId(jobNode.path("correlationId").asText(null));
+        job.setId(jobNode.path("id").asString(null));
+        job.setCorrelationId(jobNode.path("correlationId").asString(null));
         job.setRetries(jobNode.path("retries").asInt(0));
 
         if (jobNode.hasNonNull("processInstanceId")) {
-            job.setScopeId(jobNode.path("processInstanceId").asText(null));
+            job.setScopeId(jobNode.path("processInstanceId").asString(null));
             job.setScopeType("bpmn");
-            job.setSubScopeId(jobNode.path("executionId").asText(null));
-            job.setScopeDefinitionId(jobNode.path("processDefinitionId").asText(null));
+            job.setSubScopeId(jobNode.path("executionId").asString(null));
+            job.setScopeDefinitionId(jobNode.path("processDefinitionId").asString(null));
         } else {
-            job.setScopeId(jobNode.path("scopeId").asText(null));
-            job.setScopeType(jobNode.path("scopeType").asText(null));
-            job.setSubScopeId(jobNode.path("subScopeId").asText(null));
-            job.setScopeDefinitionId(jobNode.path("scopeDefinitionId").asText(null));
+            job.setScopeId(jobNode.path("scopeId").asString(null));
+            job.setScopeType(jobNode.path("scopeType").asString(null));
+            job.setSubScopeId(jobNode.path("subScopeId").asString(null));
+            job.setScopeDefinitionId(jobNode.path("scopeDefinitionId").asString(null));
         }
 
-        job.setTenantId(jobNode.path("tenantId").asText(null));
+        job.setTenantId(jobNode.path("tenantId").asString(null));
 
-        job.setElementId(jobNode.path("elementId").asText(null));
-        job.setElementName(jobNode.path("elementName").asText(null));
+        job.setElementId(jobNode.path("elementId").asString(null));
+        job.setElementName(jobNode.path("elementName").asString(null));
 
-        job.setExceptionMessage(jobNode.path("exceptionMessage").asText(null));
+        job.setExceptionMessage(jobNode.path("exceptionMessage").asString(null));
 
-        job.setCreateTime(asInstant(jobNode.path("createTime").asText(null)));
-        job.setDueDate(asInstant(jobNode.path("dueDate").asText(null)));
+        job.setCreateTime(asInstant(jobNode.path("createTime").asString(null)));
+        job.setDueDate(asInstant(jobNode.path("dueDate").asString(null)));
 
-        job.setWorkerId(jobNode.path("lockOwner").asText(null));
-        job.setLockExpirationTime(asInstant(jobNode.path("lockExpirationTime").asText(null)));
+        job.setWorkerId(jobNode.path("lockOwner").asString(null));
+        job.setLockExpirationTime(asInstant(jobNode.path("lockExpirationTime").asString(null)));
 
         JsonNode variablesNode = jobNode.path("variables");
         if (variablesNode.isArray() && !variablesNode.isEmpty()) {
@@ -147,7 +147,7 @@ public class RestExternalWorkerJobAcquireBuilder extends BaseExternalWorkerJobAc
     }
 
     protected Instant asInstant(String value) {
-        if (value == null) {
+        if (value == null || value.isEmpty()) {
             return null;
         }
 
@@ -157,12 +157,12 @@ public class RestExternalWorkerJobAcquireBuilder extends BaseExternalWorkerJobAc
     protected void parseVariables(ArrayNode variablesNode, BiConsumer<String, Object> variableConsumer) {
         for (JsonNode variableNode : variablesNode) {
 
-            String variableName = variableNode.path("name").asText(null);
+            String variableName = variableNode.path("name").asString(null);
             if (variableName == null || variableName.isEmpty()) {
                 continue;
             }
 
-            String type = variableNode.path("type").asText(null);
+            String type = variableNode.path("type").asString(null);
             JsonNode valueNode = variableNode.path("value");
 
             variableConsumer.accept(variableName, parseVariableValue(type, valueNode));
@@ -175,15 +175,15 @@ public class RestExternalWorkerJobAcquireBuilder extends BaseExternalWorkerJobAc
         }
 
         return switch (type) {
-            case "string" -> valueNode.textValue();
+            case "string" -> valueNode.stringValue();
             case "json" -> valueNode;
             case "boolean" -> valueNode.booleanValue();
             case "double" -> valueNode.doubleValue();
             case "long" -> valueNode.longValue();
-            case "date" -> Date.from(Instant.parse(valueNode.textValue()));
-            case "instant" -> Instant.parse(valueNode.textValue());
-            case "localDate" -> LocalDate.parse(valueNode.textValue());
-            case "localDateTime" -> LocalDateTime.parse(valueNode.textValue());
+            case "date" -> Date.from(Instant.parse(valueNode.stringValue()));
+            case "instant" -> Instant.parse(valueNode.stringValue());
+            case "localDate" -> LocalDate.parse(valueNode.stringValue());
+            case "localDateTime" -> LocalDateTime.parse(valueNode.stringValue());
             case "short" -> valueNode.shortValue();
             case "integer" -> valueNode.intValue();
             default -> {

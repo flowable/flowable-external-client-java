@@ -891,6 +891,37 @@ class RestExternalWorkerClientTest {
                 .hasMessage("Failing a job failed with status " + statusCode + " and body: " + responseBody);
     }
 
+    @Test
+    void acquireJobWithNullDueDate() {
+        restInvoker.response = new TestRestResponse(200, """
+                [
+                  {
+                    "id": "job-1",
+                    "correlationId": "correlation-1",
+                    "processInstanceId": "proc-1",
+                    "executionId": "exec-1",
+                    "processDefinitionId": "proc-def-1",
+                    "tenantId": "flowable",
+                    "elementId": "elem-1",
+                    "elementName": "Element 1",
+                    "createTime": "2023-08-21T13:12:28Z",
+                    "dueDate": null,
+                    "retries": 4,
+                    "lockOwner": "tester-worker",
+                    "lockExpirationTime": "2023-08-22T10:12:28Z"
+                  }
+                ]
+                """);
+        List<AcquiredExternalWorkerJob> jobs = client.createJobAcquireBuilder().topic("customer").acquireAndLock();
+
+        assertThat(jobs).hasSize(1);
+        AcquiredExternalWorkerJob job = jobs.get(0);
+        assertThat(job.getId()).isEqualTo("job-1");
+        assertThat(job.getCreateTime()).isEqualTo(Instant.parse("2023-08-21T13:12:28Z"));
+        assertThat(job.getDueDate()).isNull();
+        assertThat(job.getLockExpirationTime()).isEqualTo(Instant.parse("2023-08-22T10:12:28Z"));
+    }
+
     static class TestRestInvoker implements RestInvoker {
 
         protected String path;
